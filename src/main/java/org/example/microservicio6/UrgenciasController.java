@@ -1,5 +1,7 @@
 package org.example.microservicio6;
 
+import io.micrometer.core.instrument.Gauge;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,12 @@ public class UrgenciasController {
     @Autowired
     private PacienteRepository pacienteRepository;
 
-    public UrgenciasController(HealthMonitorController healthMonitorController) {
+    @Autowired
+    public UrgenciasController(HealthMonitorController healthMonitorController, MeterRegistry meterRegistry) {
         this.urgenciasPacientes = healthMonitorController.getUrgenciasPacientes();
+        Gauge.builder("urgencias_size", urgenciasPacientes, List::size)
+                .description("Number of patients in urgencias")
+                .register(meterRegistry);
     }
 
     public Flux<String> urgencias() {
