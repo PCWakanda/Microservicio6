@@ -5,25 +5,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "pacientes")
-public class Paciente {
+@Table(name = "urgencias")
+public class Urgencias {
     @Id
     private int id;
     private int constantesVitales;
     private int pulso;
     private int azucar;
-    private int ticksEnUrgencias; // New field
+    private int ticksEnUrgencias;
 
-    public Paciente() {
+    public Urgencias() {
         // No-arg constructor
     }
 
-    public Paciente(int id, int constantesVitales, int pulso, int azucar) {
+    public Urgencias(int id, int constantesVitales, int pulso, int azucar, int ticksEnUrgencias) {
         this.id = id;
         this.constantesVitales = constantesVitales;
         this.pulso = pulso;
         this.azucar = azucar;
-        this.ticksEnUrgencias = 0; // Initialize to 0
+        this.ticksEnUrgencias = ticksEnUrgencias;
     }
 
     // Getters y setters
@@ -65,9 +65,5 @@ public class Paciente {
 
     public void setTicksEnUrgencias(int ticksEnUrgencias) {
         this.ticksEnUrgencias = ticksEnUrgencias;
-    }
-
-    public void incrementarTicksEnUrgencias() {
-        this.ticksEnUrgencias++;
     }
 }

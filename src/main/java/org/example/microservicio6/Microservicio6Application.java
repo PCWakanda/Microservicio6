@@ -17,6 +17,9 @@ public class Microservicio6Application {
     @Autowired
     private HealthMonitorController healthMonitorController;
 
+    @Autowired
+    private UrgenciasController urgenciasController;
+
     public static void main(String[] args) {
         SpringApplication.run(Microservicio6Application.class, args);
     }
@@ -25,5 +28,6 @@ public class Microservicio6Application {
     public void init() {
         logger.info("Ejecución empezada");
         healthMonitorController.iniciarFlujo();
+        urgenciasController.iniciarFlujo();
     }
 }
